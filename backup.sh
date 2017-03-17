@@ -2,13 +2,12 @@
 
 # USER CONFIGURATION:
 resticuser=restic
-srcdir=/Users/timowulff/Documents
 backupvolume=Timo
 backupdir=/Volumes/${backupvolume}/backup-restic
 
 # See: http://blog.macromates.com/2006/keychain-access-from-shell/
 # Parse output of 'security' and set RESTIC_PASSWORD:
-export RESTIC_PASSWORD=$(security 2>&1 >/dev/null find-generic-password -ga restic |ruby -e 'print $1 if STDIN.gets =~ /^password: "(.*)"$/')
+export RESTIC_PASSWORD=$(security 2>&1 >/dev/null find-generic-password -ga ${resticuser} |ruby -e 'print $1 if STDIN.gets =~ /^password: "(.*)"$/')
 
 # Backups
 restic -r ${backupdir} backup /Users/timowulff/
